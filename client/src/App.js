@@ -20,7 +20,7 @@ function App() {
         <Route exact path="/register" element={user.user.email !==''? <Navigate to='/' /> : <Register/>}></Route>
         <Route exact path="/login" element={user.user.email !== '' ? <Navigate to='/' /> : <Login/>}></Route>
         <Route exact path="/write" element={user.user.email !== ''? <Write/> : <Navigate to='/login'/>}></Route>
-        <Route exact path="/settings" element={user.user.email !== ''? <Settings/> : <Register/>}></Route>
+        <Route exact path="/settings" element={user.user.email !== ''? <Settings/> : <Navigate to='/login'/>}></Route>
         <Route exact path="/post/:id" element={<Single/>}></Route>
       </Routes>
     </>
