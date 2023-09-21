@@ -76,35 +76,37 @@ export const login = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  await userSchema
-    .findById(req.params.id)
-    .then(async (user) => {
-      if (req.body.password) {
-        req.body.password = await bcrypt.hash(req.body.password, 10);
-      }
-      if (req.file.path) {
-        user.profilePic = req.file.path;
-      }
-
-      user
-        .save({ new: true })
-        .then((updateUser) => {
-          res.status(200).json({
-            message: "User Updated Successfully",
-            User: updateUser,
-          });
-        })
-        .catch((err) => {
-          res.status(500).json({
-            message: `Error Updating User: ${err.message}`,
-          });
-        });
-    })
-    .catch((err) => {
-      res.status(500).json({
+  try {
+    const user = await userSchema.findById(req.params.id);
+  
+    if (!user) {
+      return res.status(404).json({
         message: "User Not Found",
       });
+    }
+  
+    if (req.body.username) {
+      user.username = req.body.username;
+    }
+    if (req.body.email) {
+      user.email = req.body.email;
+    }
+    if (req.file && req.file.path) {
+      user.profilePic = req.file.path;
+    }
+  
+    const updateUser = await user.save({new:true});
+  
+    res.status(200).json({
+      message: "User Updated Successfully",
+      User: updateUser,
     });
+  } catch (err) {
+    res.status(500).json({
+      message: `Error Updating User: ${err.message}`,
+    });
+  }
+  
 };
 
 export const getUserById = async (req, res) => {

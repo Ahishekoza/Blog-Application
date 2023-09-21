@@ -4,3 +4,11 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+
+.posts_without_sidebar{
+    flex: 1;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}

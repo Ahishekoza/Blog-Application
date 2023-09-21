@@ -7,9 +7,11 @@ const AuthContextProvider = ({children}) =>{
         token:'',
         user:{
             email:'',
-            username:''
+            username:'',
+            profilePic:''
         }
     })
+
     
     useEffect(()=>{
         const user = localStorage.getItem('authUser')
@@ -18,7 +20,7 @@ const AuthContextProvider = ({children}) =>{
         if(user && token){
             const parsedUser = JSON.parse(user)
 
-            SetUser({...user,token:token,user:{email:parsedUser.email,username:parsedUser.username}})
+            SetUser({...user,token:token,user:{email:parsedUser.email,username:parsedUser.username,profilePic:parsedUser.profilePic}})
         }
     },[])
 

@@ -1,10 +1,10 @@
 import "./Post.css";
 import { Link } from "react-router-dom";
 
-const Post = ({ img }) => {
+const Post = (props) => {
   return (
-    <div className="post">
-      <img src={img} alt="" className="postImg"></img>
+    <div className={props.class}>
+      <img src={props.img} alt="" className="postImg"></img>
       <div className="postInfo">
         <div className="postCats">
           <Link className="link" to="/post?cat=Music">

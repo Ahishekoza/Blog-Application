@@ -1,14 +1,19 @@
 import "./Sidebar.css";
-import SideBarImg from '../../imgs/sidebarImg.jpg'
+import { useAuth } from "../../context/authContext";
+import { PF } from "../../baseInstance,";
 
 
 const Sidebar = () => {
+
+  // eslint-disable-next-line 
+  const [user,setUser]= useAuth()
+
   return (
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
         <img
-          src={SideBarImg}
+          src={user.user.profilePic? PF+user.user.profilePic : ''}
           alt=""
           className="sidebarImg"
         />

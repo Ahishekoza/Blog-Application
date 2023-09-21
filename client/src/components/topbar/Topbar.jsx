@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import "./Topbar.css";
 import { useAuth } from "../../context/authContext";
+import { PF } from "../../baseInstance,";
 
 const Topbar = () => {
   // eslint-disable-next-line
   const [user,setUser]= useAuth();
 
   const handleLogout = () => {
-    setUser({...user,token:'',user:{email:'',username:''}})
+    setUser({...user,token:'',user:{email:'',username:'',profilePic:''}})
     localStorage.clear()
   }
+  
+  
+
 
   return (
     <div className="topbar">
@@ -37,7 +41,7 @@ const Topbar = () => {
           <Link to="/settings">
             <img
               className="topImg"
-              src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src={user.user.profilePic? PF+user.user.profilePic : ''}
               alt=""
             ></img>
           </Link>

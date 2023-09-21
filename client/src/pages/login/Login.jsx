@@ -4,7 +4,8 @@ import axios from 'axios'
 import { useAuth } from '../../context/authContext'
 const userData = {
   email :'',
-  password :''
+  password :'',
+  profilePic:''
 
 }
 
@@ -16,7 +17,8 @@ const Login = () => {
   const handleLogin = async(e) => {
     e.preventDefault()
     await axios.post('/user/login',{email:userInfo.email,password:userInfo.password}).then((response)=>{
-      setUser({...user,token:response.data.User.token,user:{ email: response.data.User.email,username:response.data.User.username}})
+      setUser({...user,token:response.data.User.token,user:{ email: response.data.User.email,username:response.data.User.username,profilePic:response.data.User.profilePic}})
+      
       localStorage.setItem('authToken',response.data.User.token) 
       localStorage.setItem('authUser',JSON.stringify({...response.data.User,token:'',password:''}))
     }).catch((error) => {

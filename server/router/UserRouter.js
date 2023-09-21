@@ -1,19 +1,10 @@
 import express from "express";
 const router = express.Router();
-import multer from 'multer'
 import { register, getUserById, updateUser, login, getAllUsers,  } from "../controller/UserController.js";
 import { verfiyToken } from "../verifyToken.js";
+import { upload } from "../fileUpload.js";
 
-const storage = multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,'./uploads')
-    },
-    filename:(req,file,cb)=>{
-        cb(null, file.originalname)
-    }
-})
 
-const upload = multer({storage:storage});
 
 // POST REQUEST
 router.post('/register',register)

@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 import UserRouter from './router/UserRouter.js'
+import PostRouter from './router/PostRouter.js'
 import cors from 'cors'
 
 dotenv.config()
@@ -18,6 +19,7 @@ app.use(express.json())
 app.use('/uploads', express.static('./uploads'));
 
 app.use('/api/user',UserRouter)
+app.use('/api/post',PostRouter)
 
 
 
