@@ -1,1 +1,3 @@
 class: prop used in Posts & Post to hide the side bar when user is not present
+
+

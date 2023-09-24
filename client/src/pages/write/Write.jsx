@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import './Write.css'
 import { useAuth } from '../../context/authContext'
-import { HTTP, PF } from '../../baseInstance,'
+import { PF } from '../../baseInstance,'
 import {
   Dialog,
   DialogActions,
@@ -11,6 +11,7 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const Write = () => {
   const navigate = useNavigate()
   // eslint-disable-next-line 
@@ -34,8 +35,8 @@ const Write = () => {
     if(file){
       postData.append('blogPost',file)
     }
-    
-   await HTTP.post('/post/',postData).then((response)=>{
+    console.log(postData)
+   await axios.post('/post/',postData,{headers:{Authorization: `Bearer ${localStorage.getItem('authToken')}`}}).then((response)=>{
     setOpen(true)
     setMessage("Blog Post Created Successfully!")
     console.log(response);

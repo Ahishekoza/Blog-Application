@@ -1,10 +1,13 @@
+import { PF } from "../../baseInstance,";
 import "./Post.css";
 import { Link } from "react-router-dom";
 
 const Post = (props) => {
+
+  
   return (
     <div className={props.class}>
-      <img src={props.img} alt="" className="postImg"></img>
+      <img src={props.post.blogPost !== '' ? PF+props.post.blogPost :''} alt="" className="postImg"></img>
       <div className="postInfo">
         <div className="postCats">
           <Link className="link" to="/post?cat=Music">
@@ -14,23 +17,12 @@ const Post = (props) => {
             <span className="postCat">Life</span>
           </Link>
         </div>
-        <Link className="link" to='/post/abc'>
-          <span className="postTitle">Lorem ipsum dolor sit amet</span>
+        <Link className="link" to={`/post/${props.post._id}`}>
+          <span className="postTitle">{props.post.title}</span>
         </Link>
-        <span className="postDate">1 hour ago</span>
+        <span className="postDate">{new Date(props.post.createdAt).toDateString()}</span>
         <p className="postDesc">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
-          officia architecto deserunt deleniti? Labore ipsum aspernatur magnam
-          fugiat, reprehenderit praesentium blanditiis quos cupiditate ratione
-          atque, exercitationem quibusdam, reiciendis odio laboriosam? Lorem
-          ipsum dolor sit amet, consectetur adipisicing elit. Assumenda officia
-          architecto deserunt deleniti? Labore ipsum aspernatur magnam fugiat,
-          reprehenderit praesentium blanditiis quos cupiditate ratione atque,
-          exercitationem quibusdam, reiciendis odio laboriosam? Lorem ipsum
-          dolor sit amet, consectetur adipisicing elit. Assumenda officia
-          architecto deserunt deleniti? Labore ipsum aspernatur magnam fugiat,
-          reprehenderit praesentium blanditiis quos cupiditate ratione atque,
-          exercitationem quibusdam, reiciendis odio laboriosam?
+          {props.post.desc}
         </p>
       </div>
     </div>
