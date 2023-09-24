@@ -1,6 +1,7 @@
 import postSchema from "../models/postSchema.js";
 
 export const postBlog = async (req, res) => {
+
   if (req.user.username === req.body.username) {
     const post = new postSchema({
       title: req.body.title,
@@ -23,7 +24,7 @@ export const postBlog = async (req, res) => {
       })
       .catch((err) => {
         res.status(404).json({
-          message: "Error saving post",
+          message: `Error saving post ${err.message}`,
         });
       });
   } else {
@@ -85,3 +86,23 @@ export const getBlogById = async (req, res) => {
       });
     });
 };
+
+export const getAllBlogPosts  = async (req, res) => {
+  // console.log(req.user.username === req.body.username);
+  // if(req.user.username === req.body.username){
+    await postSchema.find().limit(5).then((response)=>{
+      res.status(200).json({
+        BlogPosts: response
+      })
+    }).catch((err) => {
+      res.status(404).json({
+        message:`Blog Posts not found ${err.message}`,
+      })
+    })
+  // }
+  // else{
+  //   res.status(401).json({
+  //     message:'You are unauthorized to access this blog posts'
+  //   })
+  // }
+}

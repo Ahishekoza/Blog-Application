@@ -9,6 +9,7 @@ export const verfiyToken =(req,res,next)=>{
     const secret_key = process.env.SECRET_KEY
     const user = jwtToken.verify(token,secret_key)
     if(user){
+        console.log(user.username)
         req.user = user
         next();
     }
