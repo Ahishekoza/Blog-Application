@@ -20,7 +20,7 @@ const Post = (props) => {
         <Link className="link" to={`/post/${props.post._id}`}>
           <span className="postTitle">{props.post.title}</span>
         </Link>
-        <span className="postDate">{new Date(props.post.createdAt).toDateString()}</span>
+        <span className="postDate">{new Date(props.post.updatedAt).toDateString()}</span>
         <p className="postDesc">
           {props.post.desc}
         </p>

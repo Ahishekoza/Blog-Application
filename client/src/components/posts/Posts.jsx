@@ -7,9 +7,10 @@ const Posts = (props) => {
   const [user, setUser] = useAuth();
   return (
     <div className={props.class}>
-      {props.posts.map((post) => {
+      {props.posts.map((post, index) => {
         return (
           <Post
+            key={index}
             class={user.token && user.user ? "post" : "post_without_sidebar"}
             post={post}
           />

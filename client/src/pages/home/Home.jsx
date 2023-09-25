@@ -32,7 +32,7 @@ const Home = () => {
           
             <Posts posts={posts}  class={user.token && user.user ? 'posts':'posts_without_sidebar'}   />
             {
-              user.token && user.user  && <Sidebar/>
+              user.token && user.user  ?<Sidebar/> : ''
             }
         </div>
     </div>

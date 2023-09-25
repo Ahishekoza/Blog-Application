@@ -50,7 +50,7 @@ export const editBlogPost = async (req, res) => {
       existingBlog.blogPost = req.file.path;
     }
 
-    const updatedBlog = await existingBlog.save()
+    const updatedBlog = await existingBlog.save({timestamps:true},{new:true})
 
     if(updatedBlog){
         res.status(200).json({

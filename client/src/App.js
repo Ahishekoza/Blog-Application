@@ -21,7 +21,7 @@ function App() {
         <Route exact path="/login" element={user.user.email !== '' ? <Navigate to='/' /> : <Login/>}></Route>
         <Route exact path="/write" element={user.user.email !== ''? <Write/> : <Navigate to='/login'/>}></Route>
         <Route exact path="/settings" element={user.user.email !== ''? <Settings/> : <Navigate to='/login'/>}></Route>
-        <Route exact path="/post/:postId" element={<Single/>}></Route>
+        <Route exact path="/post/:postId" element={user.user.email !== ''? <Single/> : <Navigate to='/login'/>}></Route>
       </Routes>
     </>
   );
