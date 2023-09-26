@@ -24,6 +24,7 @@ function App() {
         <Route exact path="/post/:postId" element={user.user.email !== ''? <Single/> : <Navigate to='/login'/>}></Route>
       </Routes>
     </>
+    
   );
 }
 

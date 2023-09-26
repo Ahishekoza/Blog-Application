@@ -33,7 +33,7 @@ const Login = () => {
             <label htmlFor="">Email</label>
             <input type="text" className='loginInput'placeholder='Enter your Email...' onChange={(e)=> setUserInfo({...userInfo,email:e.target.value})} />
             <label>Password</label>
-            <input type='password' className='loginInput' placeholder='Enter your Password ...'  onChange={(e)=> setUserInfo({...userInfo,password:e.target.value})}/>
+            <input type='password' className='loginInput' placeholder='Enter your Password ...' autoComplete='on'  onChange={(e)=> setUserInfo({...userInfo,password:e.target.value})}/>
             <button className='loginButton' onClick={handleLogin}>Login</button>
         </form>
         {/* <button className='loginRegistrationButton'>Register</button> */}

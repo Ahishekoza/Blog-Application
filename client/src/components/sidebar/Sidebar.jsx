@@ -1,19 +1,36 @@
 import "./Sidebar.css";
 import { useAuth } from "../../context/authContext";
 import { PF } from "../../baseInstance,";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+  // eslint-disable-next-line
+  const [user, setUser] = useAuth();
+  const [categories, setCategories] = useState([]);
 
-  // eslint-disable-next-line 
-  const [user,setUser]= useAuth()
+  const getAllCategories = async () => {
+    await axios
+      .get("/category/")
+      .then((response) => {
+        setCategories(response.data.categories);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
 
   return (
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
         <img
-          src={user.user.profilePic? PF+user.user.profilePic : ''}
+          src={user.user.profilePic ? PF + user.user.profilePic : ""}
           alt=""
           className="sidebarImg"
         />
@@ -25,27 +42,21 @@ const Sidebar = () => {
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-          <li className="sidebarListItem"> 
-              Life
-          </li>
-          <li className="sidebarListItem">
-              Music
-          </li>
-          <li className="sidebarListItem">
-              Sport
-          </li>
-          <li className="sidebarListItem">
-              Style
-          </li>
-          <li className="sidebarListItem">
-              Tech
-          </li>
-          <li className="sidebarListItem">
-              Cinema
-          </li>
+          {categories.map((category, index) => {
+            return (
+              <Link
+                className="link"
+                to={{ pathname: "/", search: `?category=${category._id}` }}
+              >
+                <li key={index} className="sidebarListItem">
+                  {category.name}
+                </li>
+              </Link>
+            );
+          })}
         </ul>
       </div>
-       <div className="sidebarItem">
+      <div className="sidebarItem">
         <span className="sidebarTitle">FOLLOW US</span>
         <div className="sidebarSocial">
           <i className="sidebarIcon fab fa-facebook-square"></i>

@@ -46,6 +46,10 @@ export const editBlogPost = async (req, res) => {
         existingBlog.desc = req.body.desc;
     }
 
+    if(req.body.categories){
+      existingBlog.categories = req.body.categories
+    }
+
     if ( req.file && req.file.path ) {
       existingBlog.blogPost = req.file.path;
     }
@@ -88,9 +92,11 @@ export const getBlogById = async (req, res) => {
 };
 
 export const getAllBlogPosts  = async (req, res) => {
-  // console.log(req.user.username === req.body.username);
-  // if(req.user.username === req.body.username){
-    await postSchema.find().limit(5).then((response)=>{
+  
+    const username = req.query.user
+    const category = req.query.category
+   if(username){
+    await postSchema.find({username:username}).then((response)=>{
       res.status(200).json({
         BlogPosts: response
       })
@@ -99,10 +105,21 @@ export const getAllBlogPosts  = async (req, res) => {
         message:`Blog Posts not found ${err.message}`,
       })
     })
-  // }
-  // else{
-  //   res.status(401).json({
-  //     message:'You are unauthorized to access this blog posts'
-  //   })
-  // }
+   }
+   else{
+    await postSchema.find(
+      {categories: {$in:[category]}}
+      ).then((response)=>{
+        res.status(200).json({
+          BlogPosts: response
+        })
+      }).catch((err) => {
+        res.status(404).json({
+          message:`Blog Posts not found ${err.message}`,
+        })
+      })
+   }
+    
+  
 }
+

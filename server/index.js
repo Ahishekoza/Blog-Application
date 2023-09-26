@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import UserRouter from './router/UserRouter.js'
 import PostRouter from './router/PostRouter.js'
+import CategoryRouter from './router/CategoryRouter.js'
 import cors from 'cors'
 
 dotenv.config()
@@ -20,6 +21,7 @@ app.use('/uploads', express.static('./uploads'));
 
 app.use('/api/user',UserRouter)
 app.use('/api/post',PostRouter)
+app.use('/api/category',CategoryRouter)
 
 
 
